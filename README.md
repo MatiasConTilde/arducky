@@ -1,2 +1,12 @@
 # arducky
-Duckyscript interpreter for use with an Arduino Leonardo
+Interpreter that reads duckyscript feom a file and generates an Arduino sketch
+
+##How to use:
+First you have to compile the c++ program to an executable.
+To do so, navigate to the folder with the terminal
+´cd 'path/to/folder'´
+Then compile it with g++
+´g++ -o [executable_name] [source_name.cpp]´
+Once it is compiled, you can interpret as many duckyscripts as you like, without compiling it ever again
+
+To actually interpret the code, you have to put a file called ´input.txt´ in the same folder as the executable with the duckyscript in it and run it by double clicking on it. A new ´output.ino´ file will be created, wich you can upload to the Arduino Leonardo.
