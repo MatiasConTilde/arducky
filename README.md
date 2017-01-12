@@ -1,5 +1,5 @@
 # arducky
-Interpreter that reads duckyscript feom a file and generates an Arduino sketch
+Interpreter that reads duckyscript from a file and generates an Arduino sketch
 
 ## How to use:
 First you have to compile the c++ program to an executable.
@@ -20,3 +20,5 @@ To actually interpret the code, you have to put a file called `input.txt` in the
 - You can write Arduino code directly, for example a for loop and it won't get interpreted
 - More commands:
   `LOOP` will put all following code in `void loop(){}` so it keeps repeating forever
+
+Thonks to [Seytonic](https://www.youtube.com/seytonic) and [Dckuino.js](https://github.com/Thecakeisgit/Dckuino.js)
