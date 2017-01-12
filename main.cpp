@@ -17,7 +17,7 @@ int main() {
   outFile << "#include \"Keyboard.h\"" << endl << endl;
   outFile << "void setup() {" << endl;
   outFile << "Keyboard.begin();" << endl;
-  outFile << "delay(400);" << endl << endl;
+  outFile << "delay(400);" << endl;
 
   while (!inFile.eof()) {
     string inLine;
@@ -28,28 +28,46 @@ int main() {
     string remain = inLine.substr(spaceIndex+1);
     string outLine = inLine;
 
-    if (command == "STRING") outLine = "Keyboard.print(\"" + remain + "\");";
+    string lastKey = "";
+    bool foundKey = false;
+    for (int i = 0; i < keysLength; i++) {
+      string s = keys[i];
+      if (command == s) {
+        lastKey = keyCodes[i];
+        outLine = "Keyboard.press(" + lastKey + ");";
+        foundKey = true;
+        break;
+      }
+    }
+
+    if (foundKey && spaceIndex == -1) outLine.append("\ndelay(50);\nKeyboard.release(" + lastKey + ");");
+    else if (command == "STRING") outLine = "Keyboard.print(\"" + remain + "\");";
     else if (command == "DELAY") outLine = "delay(" + remain + ");";
     else if (command == "REM") outLine = "// " + remain;
     else if (command == "LOOP") {
       outLine = "}\n\nvoid loop() {";
       isInLoop = true;
     } else {
-      do {
+      // TODO no funciona con más de dos palabras
+      while (!remain.empty()) {
+        spaceIndex = remain.find_first_of(' ');
+        bool foundCommand = false;
         for (int i = 0; i < keysLength; i++) {
           string s = keys[i];
-          if (command == s) {
-            outLine = "Keyboard.press(" + keyCodes[i] + ");";
+          if (remain.substr(0, spaceIndex) == s) {
+            outLine.append("\nKeyboard.press(" + keyCodes[i] + ");");
+            foundCommand = true;
             break;
           }
         }
-        remain = remain.substr(spaceIndex+1);
-        spaceIndex = remain.find_first_of(' ');
-      } while (spaceIndex > 0);
+        if (!foundCommand) outLine.append("\nKeyboard.press(\'" + remain.substr(0, spaceIndex) + "\');");
+        remain.replace(0, spaceIndex, "");
+      }
+      if (foundKey) outLine.append("\nKeyboard.releaseAll();");
     }
 
-    outFile << outLine << endl;
-    cout << remain << endl;
+    outFile << outLine;
+    if (!inFile.eof()) outFile << endl << endl;
   }
 
   outFile << "Keyboard.end();" << endl;

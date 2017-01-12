@@ -11,7 +11,6 @@ REM saving the picture to the user Desktop, pic name QUACKED...
 DELAY 100
 GUI d
 REM shows desktop
-LOOP
 WINDOWS r
 STRING %userprofile%\Desktop\QUACKED.png
 ENTER
