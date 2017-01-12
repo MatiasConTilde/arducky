@@ -21,4 +21,4 @@ To actually interpret the code, you have to put a file called `input.txt` in the
 - More commands:
   `LOOP` will put all following code in `void loop(){}` so it keeps repeating forever
 
-Thonks to [Seytonic](https://www.youtube.com/seytonic) and [Dckuino.js](https://github.com/Thecakeisgit/Dckuino.js)
+Thanks to [Seytonic](https://www.youtube.com/seytonic) and [Dckuino.js](https://github.com/Thecakeisgit/Dckuino.js)
