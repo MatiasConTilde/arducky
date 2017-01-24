@@ -35,7 +35,6 @@ int main() {
 
     int spaceIndex = inLine.find_first_of(' ');
     string command = inLine.substr(0, spaceIndex);
-    cout << command << endl;
     string remain = inLine.substr(spaceIndex+1);
     string outLine = inLine;
 
@@ -47,17 +46,17 @@ int main() {
       outLine = "}\n\nvoid loop() {";
       isInLoop = true;
     } else if (!findKey(command).empty()) {
-      outLine = "  Keyboard.press(" + findKey(command) + ");";
-      while (!remain.empty()) {
-        spaceIndex = remain.find_first_of(' ');
-        outLine.append("\n  Keyboard.press(" + findKey(remain.substr(0, spaceIndex)) + ");");
-        remain.replace(0, spaceIndex, "");
+      outLine = "";
+      while (spaceIndex > 0) {
+        spaceIndex = inLine.find_first_of(' ');
+        outLine.append("  Keyboard.press(" + findKey(inLine.substr(0, spaceIndex)) + ");\n");
+        inLine.replace(0, spaceIndex+1, "");
       }
-      outLine.append("\n  Keyboard.releaseAll();");
+      outLine.append("  Keyboard.releaseAll();");
     }
 
     outFile << outLine;
-    if (!inFile.eof()) outFile << endl << endl;
+    if (!inFile.eof()) outFile << endl;
   }
 
   outFile << "  Keyboard.end();" << endl;
