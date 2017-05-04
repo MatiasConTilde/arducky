@@ -1,17 +1,29 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <unordered_map>
 using namespace std;
 
+const int keysLength = 68;
+const string keys[keysLength] = {"ESCAPE", "ESC", "GUI", "WINDOWS", "COMMAND", "MENU", "APP", "END", "SPACE", "TAB", "PRINTSCREEN", "ENTER", "RETURN", "UPARROW", "DOWNARROW", "LEFTARROW", "RIGHTARROW", "UP", "DOWN", "LEFT", "RIGHT", "CAPSLOCK", "DELETE", "DEL", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "PAGEUP", "PAGEDOWN", "ALT", "SHIFT", "CTRL", "CONTROL", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+const string keyCodes[keysLength] = {"KEY_LEFT_ESC", "KEY_LEFT_ESC", "KEY_LEFT_GUI", "KEY_LEFT_GUI", "KEY_LEFT_GUI", "229", "229", "KEY_END", "\' \'", "KEY_TAB", "206", "KEY_RETURN", "KEY_RETURN", "KEY_UP_ARROW", "KEY_DOWN_ARROW", "KEY_LEFT_ARROW", "KEY_RIGHT_ARROW", "KEY_UP_ARROW", "KEY_DOWN_ARROW", "KEY_LEFT_ARROW", "KEY_RIGHT_ARROW", "KEY_CAPS_LOCK", "KEY_DELETE", "KEY_DELETE", "KEY_F1", "KEY_F2", "KEY_F3", "KEY_F4", "KEY_F5", "KEY_F6", "KEY_F7", "KEY_F8", "KEY_F9", "KEY_F10", "KEY_F11", "KEY_F12", "KEY_PAGE_UP", "KEY_PAGE_DOWN", "KEY_LEFT_ALT", "KEY_LEFT_SHIFT", "KEY_LEFT_CTRL", "KEY_LEFT_CTRL", "\'a\'", "\'b\'", "\'c\'", "\'d\'", "\'e\'", "\'f\'", "\'g\'", "\'h\'", "\'i\'", "\'j\'", "\'k\'", "\'l\'", "\'m\'", "\'n\'", "\'o\'", "\'p\'", "\'q\'", "\'r\'", "\'s\'", "\'t\'", "\'u\'", "\'v\'", "\'w\'", "\'x\'", "\'y\'", "\'z\'"};
+
+unordered_map<string, string> keyMap;
+
+void initKeyMap() {
+	for (int i = 0; i < keysLength; i++) {
+		keyMap[keys[i]] = keyCodes[i];
+	}
+}
+
 string findKey(string key) {
-  int keysLength = 68;
-  string keys[keysLength] = {"ESCAPE", "ESC", "GUI", "WINDOWS", "COMMAND", "MENU", "APP", "END", "SPACE", "TAB", "PRINTSCREEN", "ENTER", "RETURN", "UPARROW", "DOWNARROW", "LEFTARROW", "RIGHTARROW", "UP", "DOWN", "LEFT", "RIGHT", "CAPSLOCK", "DELETE", "DEL", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "PAGEUP", "PAGEDOWN", "ALT", "SHIFT", "CTRL", "CONTROL", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-  string keyCodes[keysLength] = {"KEY_LEFT_ESC", "KEY_LEFT_ESC", "KEY_LEFT_GUI", "KEY_LEFT_GUI", "KEY_LEFT_GUI", "229", "229", "KEY_END", "\' \'", "KEY_TAB", "206", "KEY_RETURN", "KEY_RETURN", "KEY_UP_ARROW", "KEY_DOWN_ARROW", "KEY_LEFT_ARROW", "KEY_RIGHT_ARROW", "KEY_UP_ARROW", "KEY_DOWN_ARROW", "KEY_LEFT_ARROW", "KEY_RIGHT_ARROW", "KEY_CAPS_LOCK", "KEY_DELETE", "KEY_DELETE", "KEY_F1", "KEY_F2", "KEY_F3", "KEY_F4", "KEY_F5", "KEY_F6", "KEY_F7", "KEY_F8", "KEY_F9", "KEY_F10", "KEY_F11", "KEY_F12", "KEY_PAGE_UP", "KEY_PAGE_DOWN", "KEY_LEFT_ALT", "KEY_LEFT_SHIFT", "KEY_LEFT_CTRL", "KEY_LEFT_CTRL", "\'a\'", "\'b\'", "\'c\'", "\'d\'", "\'e\'", "\'f\'", "\'g\'", "\'h\'", "\'i\'", "\'j\'", "\'k\'", "\'l\'", "\'m\'", "\'n\'", "\'o\'", "\'p\'", "\'q\'", "\'r\'", "\'s\'", "\'t\'", "\'u\'", "\'v\'", "\'w\'", "\'x\'", "\'y\'", "\'z\'"};
-  for (int i = 0; i < keysLength; i++) if (key == keys[i]) return keyCodes[i];
-  return "";
+	unordered_map<string, string>::iterator it = keyMap.find(key);
+  return it != keyMap.end() ? it->second : "";
 }
 
 int main() {
+	initKeyMap();
+
   bool isInLoop = false;
 
   ifstream inFile;
