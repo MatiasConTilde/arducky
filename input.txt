@@ -11,9 +11,12 @@ REM saving the picture to the user Desktop, pic name QUACKED...
 DELAY 100
 GUI d
 REM shows desktop
-WINDOWS r
+WINDOWS r e ALT CONTROL RCTRL
+for (int i = 0; i < 2; i++) {
 STRING %userprofile%\Desktop\QUACKED.png
 ENTER
+}
+LOOP
 REM opens the png file
 MENU
 ENTER
