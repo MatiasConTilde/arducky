@@ -7,6 +7,9 @@ Execute the file with
 or
 `chmod +x main.py` and then `./main.py`
 
+You can change the input or output file by adding args (input: -i), (output: -o).
+For example: [executable_name] -i custom_file.txt -o test_project.ino
+
 ## Differences with other interpreters:
 - It creates an Arduino file directly, not a text you have to copy-paste into a new file
 - You can write Arduino code directly, for example a for loop and it won't get parsed
