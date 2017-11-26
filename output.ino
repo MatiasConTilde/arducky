@@ -35,10 +35,10 @@ void setup() {
 	Keyboard.press(KEY_LEFT_CTRL);
 	Keyboard.press(KEY_RIGHT_CTRL);
 	Keyboard.releaseAll();
-	for (int i = 0; i < 2; i++) {
-		Keyboard.print("%userprofile%\\Desktop\\QUACKED.png");
-		typeKey(KEY_RETURN);
-	}
+for (int i = 0; i < 2; i++) {
+	Keyboard.print("%userprofile%\\Desktop\\QUACKED.png");
+	typeKey(KEY_RETURN);
+}
 }
 
 void loop() {
