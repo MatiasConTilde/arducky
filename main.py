@@ -36,7 +36,7 @@ for line in in_file:
 		out_file.write("	delay(" + remain + ");\n")
 
 	elif words[0] == "DEFAULTDELAY" or words[0] == "DEFAULT_DELAY":
-		default_delay = remain;
+		default_delay = int(remain);
 
 	elif words[0] == "REM":
 		out_file.write("	// " + remain + "\n")
@@ -92,10 +92,8 @@ for line in in_file:
 		out_file.write(line + "\n")
 
 	if default_delay > 0 and words[0] != "REM":
-		out_file.write("	delay(" + default_delay + ");\n")
+		out_file.write("	delay(" + str(default_delay) + ");\n")
 
-out_file.write("\n	Keyboard.end();\n")
-out_file.write("	Mouse.end();\n")
 out_file.write("}\n")
 if not in_loop:
 	out_file.write("\nvoid loop() {}\n")
