@@ -1,32 +1,33 @@
-GUI d
-WINDOWS
-STRING https://i.imgflip.com/1dv8ac.jpg
-ENTER
-DELAY 100
-REM Opens up window and goes to a image I created xD
-CTRL s
-STRING %userprofile%\Desktop\QUACKED
-ENTER
-REM saving the picture to the user Desktop, pic name QUACKED...
-DELAY 100
-GUI d
-REM shows desktop
-WINDOWS r e ALT CONTROL RCTRL
-for (int i = 0; i < 2; i++) {
-STRING %userprofile%\Desktop\QUACKED.png
-ENTER
-}
+REM This is an example duckyscript to show how the interpreter works
+
+REM Write text with STRING
+STRING This text will be written
+REM Characters will be escaped
+STRING asdf" \ "asdasd"
+
+REM Wait with DELAY
+DELAY 1000
+
+REM Put all the following code in loop(){}
 LOOP
-REM opens the png file
-MENU
-ENTER
+REM Press key sequences
+CTRL s
+
 ALT F4
-REM sets the background, and closes.
-GUI d
-MENU
-STRING v
-STRING d
-REM I know its basic but tell what you think im only 14 and this is my first "program" thanks Darren
+
+WINDOWS r
+
+COMMAND SPACE
+
+REM Set a default delay to be executed after each command
+REM Differently to real Duckyscript, this can be changed throuought the program
+DEFAULTDELAY 100
+STRING hello
+STRING eins zwei polizei
+DEFAULTDELAY 0
+
+REM Move the mouse and click
+REM To move, the two values have to be separated by space
 MOUSE 100 100
 MOUSE random(0,100) random(0,100)
 MOUSE CLICK
@@ -41,3 +42,9 @@ MOUSE RELEASE
 MOUSE RELEASE LEFT
 MOUSE RELEASE RIGHT
 MOUSE RELEASE MIDDLE
+
+REM Write Arduino code directly
+for (int i = 0; i < 10; i ++) {
+STRING lololo
+ENTER
+}

@@ -11,53 +11,48 @@ void setup() {
 	Mouse.begin();
 	delay(500);
 
-	Keyboard.press(KEY_LEFT_GUI);
-	Keyboard.press('d');
-	Keyboard.releaseAll();
-	typeKey(KEY_LEFT_GUI);
-	Keyboard.print("https://i.imgflip.com/1dv8ac.jpg");
-	typeKey(KEY_RETURN);
-	delay(100);
-	// Opens up window and goes to a image I created xD
-	Keyboard.press(KEY_LEFT_CTRL);
-	Keyboard.press('s');
-	Keyboard.releaseAll();
-	Keyboard.print("%userprofile%\\Desktop\\QUACKED");
-	typeKey(KEY_RETURN);
-	// saving the picture to the user Desktop, pic name QUACKED...
-	delay(100);
-	Keyboard.press(KEY_LEFT_GUI);
-	Keyboard.press('d');
-	Keyboard.releaseAll();
-	// shows desktop
-	Keyboard.press(KEY_LEFT_GUI);
-	Keyboard.press('r');
-	Keyboard.press('e');
-	Keyboard.press(KEY_LEFT_ALT);
-	Keyboard.press(KEY_LEFT_CTRL);
-	Keyboard.press(KEY_RIGHT_CTRL);
-	Keyboard.releaseAll();
-	for (int i = 0; i < 2; i++) {
-		Keyboard.print("%userprofile%\\Desktop\\QUACKED.png");
-		typeKey(KEY_RETURN);
-	}
+	// This is an example duckyscript to show how the interpreter works
+
+	// Write text with STRING
+	Keyboard.print("This text will be written");
+	// Characters will be escaped
+	Keyboard.print("asdf\" \\ \"asdasd\"");
+
+	// Wait with DELAY
+	delay(1000);
+
+	// Put all the following code in loop(){}
 }
 
 void loop() {
-	// opens the png file
-	typeKey(229);
-	typeKey(KEY_RETURN);
+
+	// Press key sequences
+	Keyboard.press(KEY_LEFT_CTRL);
+	Keyboard.press('s');
+	Keyboard.releaseAll();
+
 	Keyboard.press(KEY_LEFT_ALT);
 	Keyboard.press(KEY_F4);
 	Keyboard.releaseAll();
-	// sets the background, and closes.
+
 	Keyboard.press(KEY_LEFT_GUI);
-	Keyboard.press('d');
+	Keyboard.press('r');
 	Keyboard.releaseAll();
-	typeKey(229);
-	Keyboard.print("v");
-	Keyboard.print("d");
-	// I know its basic but tell what you think im only 14 and this is my first "program" thanks Darren
+
+	Keyboard.press(KEY_LEFT_GUI);
+	Keyboard.press(' ');
+	Keyboard.releaseAll();
+
+	// Set a default delay to be executed after each command
+	// Differently to real Duckyscript, this can be changed throuought the program
+	delay(100);
+	Keyboard.print("hello");
+	delay(100);
+	Keyboard.print("eins zwei polizei");
+	delay(100);
+
+	// Move the mouse and click
+	// To move, the two values have to be separated by space
 	Mouse.move(100, 100);
 	Mouse.move(random(0,100), random(0,100));
 	Mouse.click();
@@ -73,6 +68,9 @@ void loop() {
 	Mouse.release(MOUSE_RIGHT);
 	Mouse.release(MOUSE_MIDDLE);
 
-	Keyboard.end();
-	Mouse.end();
+	// Write Arduino code directly
+	for (int i = 0; i < 10; i ++) {
+		Keyboard.print("lololo");
+		typeKey(KEY_RETURN);
+	}
 }
