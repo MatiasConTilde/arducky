@@ -16,6 +16,7 @@ out_file.write("	Keyboard.begin();\n")
 out_file.write("	delay(500);\n")
 
 in_loop = False
+default_delay = 0
 
 for line in in_file:
 	line = line[:-1]
@@ -24,21 +25,24 @@ for line in in_file:
 	remain = line[line.find(" ")+1:]
 
 	if keys.has_key(line):
-		out_file.write("	typeKey(" + keys[line] + ");")
+		out_file.write("	typeKey(" + keys[line] + ");\n")
 
 	elif command == "STRING":
 		remain = remain.replace("\\", "\\\\")
 		remain = remain.replace("\"", "\\\"")
-		out_file.write("	Keyboard.print(\"" + remain + "\");")
+		out_file.write("	Keyboard.print(\"" + remain + "\");\n")
 
 	elif command == "DELAY":
-		out_file.write("	delay(" + remain + ");")
+		out_file.write("	delay(" + remain + ");\n")
+
+	elif command == "DEFAULTDELAY" or command == "DEFAULT_DELAY":
+		default_delay = remain;
 
 	elif command == "REM":
-		out_file.write("	// " + remain)
+		out_file.write("	// " + remain + "\n")
 
 	elif command == "LOOP" and not in_loop:
-		out_file.write("}\n\nvoid loop() {")
+		out_file.write("}\n\nvoid loop() {\n")
 		in_loop = True
 
 	elif keys.has_key(command):
@@ -47,12 +51,13 @@ for line in in_file:
 			if space < 0: space = len(line)
 			out_file.write("	Keyboard.press(" + keys[line[:space]] + ");\n")
 			line = line[space+1:]
-		out_file.write("	Keyboard.releaseAll();")
+		out_file.write("	Keyboard.releaseAll();\n")
 
 	else:
-		out_file.write(line)
+		out_file.write(line + "\n")
 
-	out_file.write("\n")
+	if default_delay > 0 and command != "REM":
+		out_file.write("	delay(" + default_delay + ");\n")
 
 out_file.write("	Keyboard.end();\n")
 out_file.write("}\n")

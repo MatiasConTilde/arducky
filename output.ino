@@ -35,26 +35,34 @@ void setup() {
 	Keyboard.press(KEY_LEFT_CTRL);
 	Keyboard.press(KEY_RIGHT_CTRL);
 	Keyboard.releaseAll();
-for (int i = 0; i < 2; i++) {
-	Keyboard.print("%userprofile%\\Desktop\\QUACKED.png");
-	typeKey(KEY_RETURN);
-}
+	for (int i = 0; i < 2; i++) {
+		Keyboard.print("%userprofile%\\Desktop\\QUACKED.png");
+		typeKey(KEY_RETURN);
+	}
 }
 
 void loop() {
+	delay(10);
 	// opens the png file
 	typeKey(229);
+	delay(10);
 	typeKey(KEY_RETURN);
+	delay(10);
 	Keyboard.press(KEY_LEFT_ALT);
 	Keyboard.press(KEY_F4);
 	Keyboard.releaseAll();
+	delay(10);
 	// sets the background, and closes.
 	Keyboard.press(KEY_LEFT_GUI);
 	Keyboard.press('d');
 	Keyboard.releaseAll();
+	delay(10);
 	typeKey(229);
+	delay(10);
 	Keyboard.print("v");
+	delay(10);
 	Keyboard.print("d");
+	delay(10);
 	// I know its basic but tell what you think im only 14 and this is my first "program" thanks Darren
 	Keyboard.end();
 }

@@ -17,6 +17,7 @@ STRING %userprofile%\Desktop\QUACKED.png
 ENTER
 }
 LOOP
+DEFAULTDELAY 10
 REM opens the png file
 MENU
 ENTER
