@@ -8,7 +8,9 @@ void typeKey(int key) {
 
 void setup() {
 	Keyboard.begin();
+	Mouse.begin();
 	delay(500);
+
 	Keyboard.press(KEY_LEFT_GUI);
 	Keyboard.press('d');
 	Keyboard.releaseAll();
@@ -42,27 +44,35 @@ void setup() {
 }
 
 void loop() {
-	delay(10);
 	// opens the png file
 	typeKey(229);
-	delay(10);
 	typeKey(KEY_RETURN);
-	delay(10);
 	Keyboard.press(KEY_LEFT_ALT);
 	Keyboard.press(KEY_F4);
 	Keyboard.releaseAll();
-	delay(10);
 	// sets the background, and closes.
 	Keyboard.press(KEY_LEFT_GUI);
 	Keyboard.press('d');
 	Keyboard.releaseAll();
-	delay(10);
 	typeKey(229);
-	delay(10);
 	Keyboard.print("v");
-	delay(10);
 	Keyboard.print("d");
-	delay(10);
 	// I know its basic but tell what you think im only 14 and this is my first "program" thanks Darren
+	Mouse.move(100, 100);
+	Mouse.move(random(0,100), random(0,100));
+	Mouse.click();
+	Mouse.click(MOUSE_LEFT);
+	Mouse.click(MOUSE_RIGHT);
+	Mouse.click(MOUSE_MIDDLE);
+	Mouse.press();
+	Mouse.press(MOUSE_LEFT);
+	Mouse.press(MOUSE_RIGHT);
+	Mouse.press(MOUSE_MIDDLE);
+	Mouse.release();
+	Mouse.release(MOUSE_LEFT);
+	Mouse.release(MOUSE_RIGHT);
+	Mouse.release(MOUSE_MIDDLE);
+
 	Keyboard.end();
+	Mouse.end();
 }

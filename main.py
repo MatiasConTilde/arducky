@@ -13,39 +13,74 @@ out_file.write("	Keyboard.release(key);\n")
 out_file.write("}\n\n")
 out_file.write("void setup() {\n")
 out_file.write("	Keyboard.begin();\n")
-out_file.write("	delay(500);\n")
+out_file.write("	Mouse.begin();\n")
+out_file.write("	delay(500);\n\n")
 
 in_loop = False
 default_delay = 0
 
 for line in in_file:
 	line = line[:-1]
-	if line.find(" ") > 0: command = line[:line.find(" ")]
-	else: command = line
+	words = line.split(" ")
 	remain = line[line.find(" ")+1:]
 
 	if keys.has_key(line):
 		out_file.write("	typeKey(" + keys[line] + ");\n")
 
-	elif command == "STRING":
+	elif words[0] == "STRING":
 		remain = remain.replace("\\", "\\\\")
 		remain = remain.replace("\"", "\\\"")
 		out_file.write("	Keyboard.print(\"" + remain + "\");\n")
 
-	elif command == "DELAY":
+	elif words[0] == "DELAY":
 		out_file.write("	delay(" + remain + ");\n")
 
-	elif command == "DEFAULTDELAY" or command == "DEFAULT_DELAY":
+	elif words[0] == "DEFAULTDELAY" or words[0] == "DEFAULT_DELAY":
 		default_delay = remain;
 
-	elif command == "REM":
+	elif words[0] == "REM":
 		out_file.write("	// " + remain + "\n")
 
-	elif command == "LOOP" and not in_loop:
+	elif words[0] == "LOOP" and not in_loop:
 		out_file.write("}\n\nvoid loop() {\n")
 		in_loop = True
 
-	elif keys.has_key(command):
+	elif words[0] == "MOUSE":
+		if words[1] == "CLICK":
+			if len(words) > 2:
+				if words[2] == "LEFT":
+					out_file.write("	Mouse.click(MOUSE_LEFT);\n")
+				if words[2] == "RIGHT":
+					out_file.write("	Mouse.click(MOUSE_RIGHT);\n")
+				if words[2] == "MIDDLE":
+					out_file.write("	Mouse.click(MOUSE_MIDDLE);\n")
+			else:
+				out_file.write("	Mouse.click();\n")
+		elif words[1] == "PRESS":
+			if len(words) > 2:
+				if words[2] == "LEFT":
+					out_file.write("	Mouse.press(MOUSE_LEFT);\n")
+				if words[2] == "RIGHT":
+					out_file.write("	Mouse.press(MOUSE_RIGHT);\n")
+				if words[2] == "MIDDLE":
+					out_file.write("	Mouse.press(MOUSE_MIDDLE);\n")
+			else:
+				out_file.write("	Mouse.press();\n")
+		elif words[1] == "RELEASE":
+			if len(words) > 2:
+				if words[2] == "LEFT":
+					out_file.write("	Mouse.release(MOUSE_LEFT);\n")
+				if words[2] == "RIGHT":
+					out_file.write("	Mouse.release(MOUSE_RIGHT);\n")
+				if words[2] == "MIDDLE":
+					out_file.write("	Mouse.release(MOUSE_MIDDLE);\n")
+			else:
+				out_file.write("	Mouse.release();\n")
+
+		else:
+			out_file.write("	Mouse.move(" + words[1] + ", " + words[2] + ");\n")
+
+	elif keys.has_key(words[0]):
 		while len(line) > 0:
 			space = line.find(" ")
 			if space < 0: space = len(line)
@@ -56,10 +91,11 @@ for line in in_file:
 	else:
 		out_file.write(line + "\n")
 
-	if default_delay > 0 and command != "REM":
+	if default_delay > 0 and words[0] != "REM":
 		out_file.write("	delay(" + default_delay + ");\n")
 
-out_file.write("	Keyboard.end();\n")
+out_file.write("\n	Keyboard.end();\n")
+out_file.write("	Mouse.end();\n")
 out_file.write("}\n")
 if not in_loop:
 	out_file.write("\nvoid loop() {}\n")
